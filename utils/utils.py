@@ -827,7 +827,114 @@ async def download(song, msg=None):
                     return
                 await download(Config.playlist[1])
    
+async def get_buttons():
+    data=Config.DATA.get("FILE_DATA")
+    if not Config.CALL_STATUS:
+        reply_markup=InlineKeyboardMarkup(
+            [
+                
+            ]
+            )
+    elif data.get('dur', 0) == 0:
+        reply_markup=InlineKeyboardMarkup(
+            [
+                
+            ]
+            )
+    else:
+        reply_markup=InlineKeyboardMarkup(
+            [
+                
+            ]
+            )
+    return reply_markup
 
+
+async def settings_panel():
+    reply_markup=InlineKeyboardMarkup(
+        [
+            [
+               InlineKeyboardButton(f"Player Mode", callback_data='info_mode'),
+               InlineKeyboardButton(f"{'🔂 Non Stop Playback' if Config.IS_LOOP else '▶️ Play and Leave'}", callback_data='is_loop'),
+            ],
+            [
+                InlineKeyboardButton("🎞 Video", callback_data=f"info_video"),
+                InlineKeyboardButton(f"{'📺 Enabled' if Config.IS_VIDEO else '🎙 Disabled'}", callback_data='is_video'),
+            ],
+            [
+                InlineKeyboardButton("🤴 Admin Only", callback_data=f"info_admin"),
+                InlineKeyboardButton(f"{'🔒 Enabled' if Config.ADMIN_ONLY else '🔓 Disabled'}", callback_data='admin_only'),
+            ],
+            [
+                InlineKeyboardButton("🪶 Edit Title", callback_data=f"info_title"),
+                InlineKeyboardButton(f"{'✏️ Enabled' if Config.EDIT_TITLE else '🚫 Disabled'}", callback_data='edit_title'),
+            ],
+            [
+                InlineKeyboardButton("🔀 Shuffle Mode", callback_data=f"info_shuffle"),
+                InlineKeyboardButton(f"{'✅ Enabled' if Config.SHUFFLE else '🚫 Disabled'}", callback_data='set_shuffle'),
+            ],
+            [
+                InlineKeyboardButton("👮 Auto Reply (PM Permit)", callback_data=f"info_reply"),
+                InlineKeyboardButton(f"{'✅ Enabled' if Config.REPLY_PM else '🚫 Disabled'}", callback_data='reply_msg'),
+            ],
+            [
+                InlineKeyboardButton('🗑 Close', callback_data='close'),
+            ]
+            
+        ]
+        )
+    await sync_to_db()
+    return reply_markup
+
+
+async def recorder_settings():
+    reply_markup=InlineKeyboardMarkup(
+        [
+        [
+            InlineKeyboardButton(f"{'⏹ Stop Recording' if Config.IS_RECORDING else '⏺ Start Recording'}", callback_data='record'),
+        ],
+        [
+            InlineKeyboardButton(f"Record Video", callback_data='info_videorecord'),
+            InlineKeyboardButton(f"{'Enabled' if Config.IS_VIDEO_RECORD else 'Disabled'}", callback_data='record_video'),
+        ],
+        [
+            InlineKeyboardButton(f"Video Dimension", callback_data='info_videodimension'),
+            InlineKeyboardButton(f"{'Portrait' if Config.PORTRAIT else 'Landscape'}", callback_data='record_dim'),
+        ],
+        [
+            InlineKeyboardButton(f"Custom Recording Title", callback_data='info_rectitle'),
+            InlineKeyboardButton(f"{Config.RECORDING_TITLE if Config.RECORDING_TITLE else 'Default'}", callback_data='info_rectitle'),
+        ],
+        [
+            InlineKeyboardButton(f"Recording Dump Channel", callback_data='info_recdumb'),
+            InlineKeyboardButton(f"{Config.RECORDING_DUMP if Config.RECORDING_DUMP else 'Not Dumping'}", callback_data='info_recdumb'),
+        ],
+        [
+            InlineKeyboardButton('🗑 Close', callback_data='close'),
+        ]
+        ]
+    )
+    await sync_to_db()
+    return reply_markup
+
+async def volume_buttons():
+    reply_markup=InlineKeyboardMarkup(
+        [
+        [
+            InlineKeyboardButton(f"{get_volume_string()}", callback_data='info_volume'),
+        ],
+        [
+            InlineKeyboardButton(f"{'🔊' if Config.MUTED else '🔇'}", callback_data='mute'),
+            InlineKeyboardButton(f"- 10", callback_data='volume_less'),
+            InlineKeyboardButton(f"+ 10", callback_data='volume_add'),
+        ],
+        [
+            InlineKeyboardButton(f"🔙 Back", callback_data='volume_back'),
+            InlineKeyboardButton('🗑 Close', callback_data='close'),
+        ]
+        ]
+    )
+    return reply_markup
 
 async def chek_the_media(link, seek=False, pic=False, title="Music"):
     if not Config.IS_VIDEO:
