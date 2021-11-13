@@ -40,6 +40,7 @@ try:
     import sys
     import os
     import math
+    import cv2
     from pyrogram.errors.exceptions.bad_request_400 import (
         BadRequest, 
         ScheduleDateInvalid,
@@ -1794,7 +1795,8 @@ def stop_and_restart():
 
 
 def get_image(title, pic, dur="Canlı"):
-    newimage = "converted.jpg"
+    resim=cv2.imread("converted.jpg")
+    cv2.imshow(resim)
     image = Image.open(pic) 
     draw = ImageDraw.Draw(image) 
     font = ImageFont.truetype('./utils/font.ttf', 60)
@@ -1809,8 +1811,8 @@ def get_image(title, pic, dur="Canlı"):
         w, h = draw.textsize(line, font=font)
         draw.text(((MAX_W - w) / 2, current_h), line, font=font, fill ="skyblue")
         current_h += h + pad
-    image.save(newimage)
-    return newimage
+    image.save(resim)
+    return resim
 
 async def edit_config(var, value):
     if var == "STARTUP_STREAM":
