@@ -1793,8 +1793,8 @@ def stop_and_restart():
     os.execl(sys.executable, sys.executable, *sys.argv)
 
 
-def get_image(title, pic, dur="Canlı"):
-        newimage = "converted.jpg"
+def get_image(title, pic, dur="Live"):
+    newimage = "converted.jpg"
     image = Image.open(pic) 
     draw = ImageDraw.Draw(image) 
     font = ImageFont.truetype('./utils/font.ttf', 60)
@@ -1802,8 +1802,8 @@ def get_image(title, pic, dur="Canlı"):
     MAX_W = 1790
     dur=convert(int(float(dur)))
     if dur=="0:00:00":
-        dur = "Canlı Oynatılıyor"
-    para=[f'Oynatılıyor: {title}', f'Süre: {dur}']
+        dur = "Live Stream"
+    para=[f'Playing: {title}', f'Duration: {dur}']
     current_h, pad = 450, 20
     for line in para:
         w, h = draw.textsize(line, font=font)
