@@ -1438,11 +1438,11 @@ sudo_filter=filters.create(sudo_users)
 
 async def get_playlist_str():
     if not Config.CALL_STATUS:
-        pl="Player is idle and no song is playing.ㅤㅤㅤㅤ"
+        pl="Player is idle and no song is playing."
     if Config.STREAM_LINK:
-        pl = f"🔈 Canlı Yayın [Live Stream]({Config.STREAM_LINK}) ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ"
+        pl = f"🔈 Canlı Yayın [Live Stream]({Config.STREAM_LINK})"
     elif not Config.playlist:
-        pl = f"🔈 Çalma listesi boş.\nCanlı yayın oynatılıyor."
+        pl = f"🔈 Çalma listesi boş. Canlı yayın oynatılıyor."
     else:
         if len(Config.playlist)>=25:
             tplaylist=Config.playlist[:25]
