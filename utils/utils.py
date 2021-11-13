@@ -1794,7 +1794,6 @@ def stop_and_restart():
 
 
 def get_image(title, pic, dur="Live"):
-    newimage = "converted.jpg"
     image = Image.open(pic) 
     draw = ImageDraw.Draw(image) 
     font = ImageFont.truetype('./utils/font.ttf', 60)
@@ -1809,8 +1808,7 @@ def get_image(title, pic, dur="Live"):
         w, h = draw.textsize(line, font=font)
         draw.text(((MAX_W - w) / 2, current_h), line, font=font, fill ="skyblue")
         current_h += h + pad
-    image.save(newimage)
-    return newimage
+    return 
 
 async def edit_config(var, value):
     if var == "STARTUP_STREAM":
