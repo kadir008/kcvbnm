@@ -1794,7 +1794,7 @@ def stop_and_restart():
 
 
 def get_image(title, pic, dur="Canlı"):
-    newimage = "grad_tc.jpg"
+    newimage = "./utils/converted.jpg"
     image = Image.open(pic) 
     draw = ImageDraw.Draw(image) 
     font = ImageFont.truetype('./utils/font.ttf', 60)
