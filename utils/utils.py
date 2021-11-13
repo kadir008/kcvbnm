@@ -1442,7 +1442,7 @@ async def get_playlist_str():
     if Config.STREAM_LINK:
         pl = f"🔈 Canlı Yayın [Live Stream]({Config.STREAM_LINK}) ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ"
     elif not Config.playlist:
-        pl = f"🔈 Çalma Listesi Boş. Canlı Yayın Oynatılıyor.ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ"
+        pl = f"🔈 Çalma listesi boş.\nCanlı yayın oynatılıyor."
     else:
         if len(Config.playlist)>=25:
             tplaylist=Config.playlist[:25]
@@ -1794,7 +1794,7 @@ def stop_and_restart():
 
 
 def get_image(title, pic, dur="Canlı"):
-    newimage = Image.truetype('./utils/converted.jpg', 60)
+    newimage = "converted.jpg"
     image = Image.open(pic) 
     draw = ImageDraw.Draw(image) 
     font = ImageFont.truetype('./utils/font.ttf', 60)
