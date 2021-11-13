@@ -1447,13 +1447,13 @@ async def get_playlist_str():
         if len(Config.playlist)>=25:
             tplaylist=Config.playlist[:25]
             pl=f"Listing first 25 songs of total {len(Config.playlist)} songs.\n"
-            pl += f"▶️ **Çalma Listesi**: ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ\n" + "\n".join([
+            pl += f"▶️ **Çalma Listesi**: ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ" + "\n".join([
                 f"**{i}**. **🎸{x[1]}**  "
                 for i, x in enumerate(tplaylist)
                 ])
             tplaylist.clear()
         else:
-            pl = f"▶️ **Çalma Listesi**: ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ\n" + "\n".join([
+            pl = f"▶️ **Çalma Listesi**: ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ" + "\n".join([
                 f"**{i}**. **🎸{x[1]}**  "
                 for i, x in enumerate(Config.playlist)
             ])
@@ -1793,8 +1793,8 @@ def stop_and_restart():
     os.execl(sys.executable, sys.executable, *sys.argv)
 
 
-def get_image(title, pic, dur="Live"):
-    newimage = "converted.jpg"
+def get_image(title, pic, dur="Canlı"):
+    newimage = "grad_tc.jpg"
     image = Image.open(pic) 
     draw = ImageDraw.Draw(image) 
     font = ImageFont.truetype('./utils/font.ttf', 60)
@@ -1803,7 +1803,7 @@ def get_image(title, pic, dur="Live"):
     dur=convert(int(float(dur)))
     if dur=="0:00:00":
         dur = "Canlı Oynatılıyor"
-    para=[f'Playing: {title}', f'Duration: {dur}']
+    para=[f'Oynatılıyor: {title}', f'Süre: {dur}']
     current_h, pad = 450, 20
     for line in para:
         w, h = draw.textsize(line, font=font)
