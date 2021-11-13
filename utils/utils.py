@@ -1475,13 +1475,17 @@ async def get_buttons():
     elif data.get('dur', 0) == 0:
         reply_markup=InlineKeyboardMarkup(
             [
-                
+                [
+                     InlineKeyboardButton('🗑 Close', callback_data='close'),
+                ],
             ]
             )
     else:
         reply_markup=InlineKeyboardMarkup(
             [
-                
+                [
+                    InlineKeyboardButton('🗑 Close', callback_data='close'),
+                ],
             ]
             )
     return reply_markup
