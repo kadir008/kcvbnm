@@ -1792,7 +1792,7 @@ def stop_and_restart():
 
 
 def get_image(title, pic, dur="Live"):
-    newimage = ""
+    newimage = "converted.jpg"
     image = Image.open(pic) 
     draw = ImageDraw.Draw(image) 
     font = ImageFont.truetype('./utils/font.ttf', 60)
