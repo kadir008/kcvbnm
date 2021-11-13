@@ -1476,7 +1476,7 @@ async def get_buttons():
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                                    InlineKeyboardButton(''),
+                    InlineKeyboardButton(f"{get_player_string()}", callback_data="info_player"),
 
                 ],
             ]
@@ -1485,7 +1485,7 @@ async def get_buttons():
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                                    InlineKeyboardButton(''),
+                    InlineKeyboardButton(f"{get_player_string()}", callback_data="info_player"),
 
                 ],
             ]
@@ -1802,7 +1802,7 @@ def get_image(title, pic, dur="Live"):
     MAX_W = 1790
     dur=convert(int(float(dur)))
     if dur=="0:00:00":
-        dur = "Live Stream"
+        dur = "Canlı Oynatılıyor"
     para=[f'Playing: {title}', f'Duration: {dur}']
     current_h, pad = 450, 20
     for line in para:
