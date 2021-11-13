@@ -1475,17 +1475,13 @@ async def get_buttons():
     elif data.get('dur', 0) == 0:
         reply_markup=InlineKeyboardMarkup(
             [
-                [
-                    InlineKeyboardButton(f"{get_player_string()}", callback_data="info_player"),
-                ]
+                
             ]
             )
     else:
         reply_markup=InlineKeyboardMarkup(
             [
-                [
-                    InlineKeyboardButton(f"{get_player_string()}", callback_data='info_player'),
-                ] 
+                
             ]
             )
     return reply_markup
