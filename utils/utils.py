@@ -1476,6 +1476,8 @@ async def get_buttons():
         reply_markup=InlineKeyboardMarkup(
             [
                 [
+                                    InlineKeyboardButton(''),
+
                 ],
             ]
             )
@@ -1483,6 +1485,8 @@ async def get_buttons():
         reply_markup=InlineKeyboardMarkup(
             [
                 [
+                                    InlineKeyboardButton(''),
+
                 ],
             ]
             )
