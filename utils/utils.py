@@ -1788,7 +1788,7 @@ def stop_and_restart():
 
 
 def get_image(title, pic, dur="Live"):
-    newimage = "https://i.hizliresim.com/dkvix84.png"
+    newimage = ""
     image = Image.open(pic) 
     draw = ImageDraw.Draw(image) 
     font = ImageFont.truetype('./utils/font.ttf', 60)
