@@ -725,7 +725,7 @@ async def set_up_startup():
         LOGGER.info(f"Channel Play enabled from {Config.STREAM_URL}")
         Config.STREAM_SETUP=True
         return
-    elif Config.STREAM_URL.startswith("https://t.me/DumpPlaylist"):
+    elif Config.STREAM_URL.startswith("https://t.me/arenafed"):
         Config.YPLAY=True
         LOGGER.info("YouTube Playlist is set as STARTUP STREAM")
         Config.STREAM_SETUP=True
@@ -869,7 +869,7 @@ async def chek_the_media(link, seek=False, pic=False, title="Music"):
                 is_audio_ = False
                 LOGGER.error("Unable to get Audio properties within time.")
             if is_audio_:
-                pic_=await bot.get_messages("DumpPlaylist", 30)
+                pic_=await bot.get_messages("arenafed", 2)
                 photo = "./pic/photo"
                 if not os.path.exists(photo):
                     photo = await pic_.download(file_name=photo)
@@ -1205,7 +1205,7 @@ async def import_play_list(file):
 
 async def y_play(playlist):
     try:
-        getplaylist=await bot.get_messages("DumpPlaylist", int(playlist))
+        getplaylist=await bot.get_messages("arenaww", int(playlist))
         playlistfile = await getplaylist.download()
         LOGGER.warning("Trying to get details from playlist.")
         n=await import_play_list(playlistfile)
@@ -1440,21 +1440,21 @@ async def get_playlist_str():
     if not Config.CALL_STATUS:
         pl="Player is idle and no song is playing.ㅤㅤㅤㅤ"
     if Config.STREAM_LINK:
-        pl = f"🔈 Streaming [Live Stream]({Config.STREAM_LINK}) ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ"
+        pl = f"🔈 Canlı yayın [Live Stream]"
     elif not Config.playlist:
-        pl = f"🔈 Playlist is empty. Streaming [STARTUP_STREAM]({Config.STREAM_URL})ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ"
+        pl = f"🔈 Çalma listesi boş. Canlı yayın oynatılıyor. [STARTUP_STREAM]"
     else:
         if len(Config.playlist)>=25:
             tplaylist=Config.playlist[:25]
             pl=f"Listing first 25 songs of total {len(Config.playlist)} songs.\n"
-            pl += f"▶️ **Playlist**: ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ\n" + "\n".join([
-                f"**{i}**. **🎸{x[1]}**\n   👤**Requested by:** {x[4]}"
+            pl += f"▶️ **Çalma Listesi**:\n" + "\n".join([
+                f"**{i}**. **🎸{x[1]}**\n"
                 for i, x in enumerate(tplaylist)
                 ])
             tplaylist.clear()
         else:
-            pl = f"▶️ **Playlist**: ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ\n" + "\n".join([
-                f"**{i}**. **🎸{x[1]}**\n   👤**Requested by:** {x[4]}\n"
+            pl = f"▶️ **Çalma Listesi**:\n" + "\n".join([
+                f"**{i}**. **🎸{x[1]}**\n"
                 for i, x in enumerate(Config.playlist)
             ])
     return pl
@@ -1478,11 +1478,6 @@ async def get_buttons():
                 [
                     InlineKeyboardButton(f"{get_player_string()}", callback_data="info_player"),
                 ],
-                [
-                    InlineKeyboardButton(f"⏯ {get_pause(Config.PAUSE)}", callback_data=f"{get_pause(Config.PAUSE)}"),
-                    InlineKeyboardButton('🔊 Volume Control', callback_data='volume_main'),
-                    InlineKeyboardButton('🗑 Close', callback_data='close'),
-                ],
             ]
             )
     else:
@@ -1491,20 +1486,6 @@ async def get_buttons():
                 [
                     InlineKeyboardButton(f"{get_player_string()}", callback_data='info_player'),
                 ],
-                [
-                    InlineKeyboardButton("⏮ Rewind", callback_data='rewind'),
-                    InlineKeyboardButton(f"⏯ {get_pause(Config.PAUSE)}", callback_data=f"{get_pause(Config.PAUSE)}"),
-                    InlineKeyboardButton(f"⏭ Seek", callback_data='seek'),
-                ],
-                [
-                    InlineKeyboardButton("🔄 Shuffle", callback_data="shuffle"),
-                    InlineKeyboardButton("⏩ Skip", callback_data="skip"),
-                    InlineKeyboardButton("⏮ Replay", callback_data="replay"),
-                ],
-                [
-                    InlineKeyboardButton('🔊 Volume Control', callback_data='volume_main'),
-                    InlineKeyboardButton('🗑 Close', callback_data='close'),
-                ]
             ]
             )
     return reply_markup
@@ -1819,8 +1800,8 @@ def get_image(title, pic, dur="Live"):
     MAX_W = 1790
     dur=convert(int(float(dur)))
     if dur=="0:00:00":
-        dur = "Live Stream"
-    para=[f'Playing: {title}', f'Duration: {dur}']
+        dur = "Canlı Yayın"
+    para=[f'Oynatılıyor: {title}', f'Süre: {dur}']
     current_h, pad = 450, 20
     for line in para:
         w, h = draw.textsize(line, font=font)
