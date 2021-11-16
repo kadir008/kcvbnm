@@ -869,7 +869,7 @@ async def chek_the_media(link, seek=False, pic=False, title="Music"):
                 is_audio_ = False
                 LOGGER.error("Unable to get Audio properties within time.")
             if is_audio_:
-                pic_=await bot.get_messages("arenafed", 2)
+                pic_=await bot.get_messages("DumpPlaylist", 30)
                 photo = "./pic/photo"
                 if not os.path.exists(photo):
                     photo = await pic_.download(file_name=photo)
@@ -1438,23 +1438,23 @@ sudo_filter=filters.create(sudo_users)
 
 async def get_playlist_str():
     if not Config.CALL_STATUS:
-        pl="Player is idle and no song is playing."
+        pl="Player is idle and no song is playing.ㅤㅤㅤㅤ"
     if Config.STREAM_LINK:
-        pl = f"🔈 Canlı Yayın [Live Stream]({Config.STREAM_LINK})"
+        pl = f"🔈 Streaming [Live Stream]({Config.STREAM_LINK}) ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ"
     elif not Config.playlist:
-        pl = f"🔈 Çalma listesi boş. Canlı yayın oynatılıyor."
+        pl = f"🔈 Playlist is empty. Streaming [STARTUP_STREAM]({Config.STREAM_URL})ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ"
     else:
         if len(Config.playlist)>=25:
             tplaylist=Config.playlist[:25]
             pl=f"Listing first 25 songs of total {len(Config.playlist)} songs.\n"
-            pl += f"▶️ **Çalma Listesi**:\n" + "\n".join([
-                f"**{i}**. **🎸{x[1]}**"
+            pl += f"▶️ **Playlist**: ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ\n" + "\n".join([
+                f"**{i}**. **🎸{x[1]}**\n   👤**Requested by:** {x[4]}"
                 for i, x in enumerate(tplaylist)
                 ])
             tplaylist.clear()
         else:
-            pl = f"▶️ **Çalma Listesi**:\n" + "\n".join([
-                f"**{i}**. **🎸{x[1]}**"
+            pl = f"▶️ **Playlist**: ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ\n" + "\n".join([
+                f"**{i}**. **🎸{x[1]}**\n   👤**Requested by:** {x[4]}\n"
                 for i, x in enumerate(Config.playlist)
             ])
     return pl
@@ -1477,7 +1477,11 @@ async def get_buttons():
             [
                 [
                     InlineKeyboardButton(f"{get_player_string()}", callback_data="info_player"),
-
+                ],
+                [
+                    InlineKeyboardButton(f"⏯ {get_pause(Config.PAUSE)}", callback_data=f"{get_pause(Config.PAUSE)}"),
+                    InlineKeyboardButton('🔊 Volume Control', callback_data='volume_main'),
+                    InlineKeyboardButton('🗑 Close', callback_data='close'),
                 ],
             ]
             )
@@ -1485,9 +1489,22 @@ async def get_buttons():
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton(f"{get_player_string()}", callback_data="info_player"),
-
+                    InlineKeyboardButton(f"{get_player_string()}", callback_data='info_player'),
                 ],
+                [
+                    InlineKeyboardButton("⏮ Rewind", callback_data='rewind'),
+                    InlineKeyboardButton(f"⏯ {get_pause(Config.PAUSE)}", callback_data=f"{get_pause(Config.PAUSE)}"),
+                    InlineKeyboardButton(f"⏭ Seek", callback_data='seek'),
+                ],
+                [
+                    InlineKeyboardButton("🔄 Shuffle", callback_data="shuffle"),
+                    InlineKeyboardButton("⏩ Skip", callback_data="skip"),
+                    InlineKeyboardButton("⏮ Replay", callback_data="replay"),
+                ],
+                [
+                    InlineKeyboardButton('🔊 Volume Control', callback_data='volume_main'),
+                    InlineKeyboardButton('🗑 Close', callback_data='close'),
+                ]
             ]
             )
     return reply_markup
@@ -1802,8 +1819,8 @@ def get_image(title, pic, dur="Live"):
     MAX_W = 1790
     dur=convert(int(float(dur)))
     if dur=="0:00:00":
-        dur = "Canlı Yayın"
-    para=[f'Oynatılıyor: {title}', f'Süre: {dur}']
+        dur = "Live Stream"
+    para=[f'Playing: {title}', f'Duration: {dur}']
     current_h, pad = 450, 20
     for line in para:
         w, h = draw.textsize(line, font=font)
