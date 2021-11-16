@@ -1442,7 +1442,7 @@ async def get_playlist_str():
     if Config.STREAM_LINK:
         pl = f"🔈 Canlı yayın [Live Stream]"
     elif not Config.playlist:
-        pl = f"🔈 Çalma listesi boş. Canlı yayın oynatılıyor. [STARTUP_STREAM]"
+        pl = f"🔈 Çalma listesi boş. Canlı yayın oynatılıyor."
     else:
         if len(Config.playlist)>=25:
             tplaylist=Config.playlist[:25]
