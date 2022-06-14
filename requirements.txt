@@ -4,7 +4,7 @@ parse-torrent-name
 tgcrypto
 yt-dlp
 youtube_search_python
-httpx==0.14.2
+httpx==0.23.0
 youtube_search
 heroku3
 pillow
