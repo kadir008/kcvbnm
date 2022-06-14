@@ -53,7 +53,7 @@ IST = pytz.timezone(Config.TIME_ZONE)
 if Config.DATABASE_URI:
     from utils import db
 
-HOME_TEXT = "<b>Merhaba ben  [{}](tg://user?id={}) 🙋‍♂️\n\nGrup sesli sohbetlerinizde 7/24 canlı müzik ve video yayınlayabilirim.\nYoutube ses dosyaları, youtube canlı yayınları ve müziklerinizi keyifle dinleyebilirsiniz.</b>"
+HOME_TEXT = "<b>Merhaba [{}](tg://user?id={}) 🙋‍♂️\n\nBen Müzik adam, grup sesli sohbetlerinizde 7/24 canlı müzik ve video yayınlayabilirim.\nYoutube ses dosyaları, youtube canlı yayınları ve müziklerinizi keyifle dinleyebilirsiniz.</b>"
 admin_filter=filters.create(is_admin) 
 
 @Client.on_message(filters.command(['start', f"start@{Config.BOT_USERNAME}"]))
@@ -116,7 +116,7 @@ async def start(client, message):
     buttons = [
         [
             InlineKeyboardButton('Müzik Kanalım', url='https://t.me/muzikodasii'),
-            InlineKeyboardButton('Oyun Grubum', url='https://t.me/joinchat/zlZMpvCngKgwMTdk')
+            InlineKeyboardButton('Oyun Grubum', url='https://t.me/+f7fP2HGuRNxlZDhk')
         ],
 
     ]
