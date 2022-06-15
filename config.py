@@ -77,7 +77,7 @@ class Config:
     #Quality vars
     E_BITRATE=os.environ.get("BITRATE", False)
     E_FPS=os.environ.get("FPS", False)
-    CUSTOM_QUALITY=os.environ.get("QUALITY", "200")
+    CUSTOM_QUALITY=os.environ.get("QUALITY", "10")
 
     #Search filters for cplay
     FILTERS =  [filter.lower() for filter in (os.environ.get("FILTERS", "video document")).split(" ")]
