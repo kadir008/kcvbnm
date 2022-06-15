@@ -56,10 +56,10 @@ class Config:
 
 
     #Optional Configuration
-    SHUFFLE=is_enabled(os.environ.get("SHUFFLE", 'True'))
+    SHUFFLE=is_enabled(os.environ.get("SHUFFLE", 'False'))
     ADMIN_ONLY=is_enabled(os.environ.get("ADMIN_ONLY", "False"))
     REPLY_MESSAGE=os.environ.get("REPLY_MESSAGE", False)
-    EDIT_TITLE = os.environ.get("EDIT_TITLE", True)
+    EDIT_TITLE = os.environ.get("EDIT_TITLE", False)
     #others
     
     RECORDING_DUMP=os.environ.get("RECORDING_DUMP", False)
@@ -76,7 +76,7 @@ class Config:
     #Quality vars
     E_BITRATE=os.environ.get("BITRATE", False)
     E_FPS=os.environ.get("FPS", False)
-    CUSTOM_QUALITY=os.environ.get("QUALITY", "10")
+    CUSTOM_QUALITY=os.environ.get("QUALITY", "20")
 
     #Search filters for cplay
     FILTERS =  [filter.lower() for filter in (os.environ.get("FILTERS", "video document")).split(" ")]
