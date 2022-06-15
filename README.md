@@ -2,7 +2,8 @@
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/kadir008/kcvbnm)
 
-## 🚀 Okteto Deployment
+## 🚀 Okteto
+<a href="https://cloud.okteto.com/deploy?repository=https://github.com/kadir008/kcvbnm"><img src="https://img.shields.io/badge/Deploy%20To%20Okteto-informational?style=for-the-badge&logo=Okteto"/></a>
 
-<h4>Click the button below to deploy on Okteto!</h4>
-<p align="center"><a href="https://cloud.okteto.com/deploy?repository=https://github.com/kadir008/kcvbnm"><img src="https://img.shields.io/badge/Deploy%20To%20Okteto-informational?style=for-the-badge&logo=Okteto" width="200""/></a>
+## 🚀 Circleci
+<a href="https://circleci.com/"><img src="https://img.shields.io/badge/CircleCi%20Deploy-red?style=for-the-badge&logo=circleci"/></a>
