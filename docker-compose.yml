@@ -1,0 +1,13 @@
+version: "1.0"
+services:
+  worker:
+    build: .
+    environment:
+      API_ID: $API_ID
+      API_HASH: $API_HASH
+      BOT_TOKEN: $BOT_TOKEN   
+      ADMINS: $ADMINS     
+      SESSION_STRING: $SESSION_STRING      
+      CHAT: $CHAT
+      STREAM_URL: $STARTUP_STREAM
+      
