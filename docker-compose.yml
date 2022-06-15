@@ -9,5 +9,5 @@ services:
       ADMINS: $ADMINS     
       SESSION_STRING: $SESSION_STRING      
       CHAT: $CHAT
-      STREAM_URL: $STARTUP_STREAM
+      STREAM_URL: $STREAM_URL
       
