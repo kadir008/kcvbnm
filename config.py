@@ -47,8 +47,8 @@ class Config:
     STREAM_URL=os.environ.get("STARTUP_STREAM", "https://www.youtube.com/watch?v=Z8-NunA-0aM")
    
     #Database
-    DATABASE_URI=os.environ.get("DATABASE_URI", None)
-    DATABASE_NAME=os.environ.get("DATABASE_NAME", "VCPlayerBot")
+    DATABASE_URI=os.environ.get("DATABASE_URI", "mongodb://admin:jitRJuyXIZbQeHR4WocxXt7Q@MongoS3601A.back4app.com:27017/4b5cbfc8c8de460188fb4ef1ea9a6d54")
+    DATABASE_NAME=os.environ.get("DATABASE_NAME", "muzikadam")
 
 
     #heroku
