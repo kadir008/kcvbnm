@@ -1,12 +1,10 @@
 pyrogram==1.3.6
 py-tgcalls==0.8.2
-parse-torrent-name
 tgcrypto
 yt-dlp
 youtube_search_python
 httpx==0.23.0
 youtube_search
-heroku3
 pillow
 motor
 dnspython
