@@ -576,7 +576,39 @@ async def change_file(link, seek, pic, width, height):
         LOGGER.error(f"Error in joining call - {e}", exc_info=True)
         return False
 
-
+async def leave_call():
+    try:
+        await group_call.leave_group_call(Config.CHAT)
+    except Exception as e:
+        LOGGER.error(f"Errors while leaving call {e}", exc_info=True)
+    #Config.playlist.clear()
+    if Config.STREAM_LINK:
+        Config.STREAM_LINK=False
+    Config.CALL_STATUS=False
+    if Config.SCHEDULE_LIST:
+        sch=Config.SCHEDULE_LIST[0]
+        if (sch['date'] - datetime.now()).total_seconds() < 86400:
+            song=Config.SCHEDULED_STREAM.get(sch['job_id'])
+            if Config.IS_RECORDING:
+                k=scheduler.get_job(str(Config.CHAT), jobstore=None)
+                if k:
+                    scheduler.remove_job(str(Config.CHAT), jobstore=None)
+                scheduler.add_job(start_record_stream, "date", id=str(Config.CHAT), run_date=sch['date'], max_instances=50, misfire_grace_time=None)
+            try:
+                await USER.send(CreateGroupCall(
+                    peer=(await USER.resolve_peer(Config.CHAT)),
+                    random_id=random.randint(10000, 999999999),
+                    schedule_date=int((sch['date']).timestamp()),
+                    title=song['1']
+                    )
+                )
+                Config.HAS_SCHEDULE=True
+            except ScheduleDateInvalid:
+                LOGGER.error("Unable to schedule VideoChat, since date is invalid")
+            except Exception as e:
+                LOGGER.error(f"Error in scheduling voicechat- {e}", exc_info=True)
+    await sync_to_db()
+    
 async def restart():
     try:
         await group_call.leave_group_call(Config.CHAT)
