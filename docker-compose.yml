@@ -1,0 +1,14 @@
+version: "1.0"
+services:
+  worker:
+    build: .
+    environment:
+      API_ID: $API_ID
+      API_HASH: $API_HASH
+      BOT_TOKEN: $BOT_TOKEN  
+      SESSION_STRING: $SESSION_STRING
+      CHAT: $CHAT
+      LOG_GROUP: $LOG_GROUP
+      STARTUP_STREAM: $STARTUP_STREAM    
+      ADMINS: $ADMINS  
+      
